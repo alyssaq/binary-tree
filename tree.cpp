@@ -93,10 +93,6 @@ int Tree::size() {
   return _size;
 }
 
-string boolToStr(bool b) {
-  return b ? "true" : "false";
-}
-
 //         13
 //     10      18
 //    5 11   8

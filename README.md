@@ -12,13 +12,8 @@ Compile:
 Run:   
 > ./unittest.out
 
-You should see all tests PASSED.
+You should see all tests PASSED.   
 
-To compile:  
-> g++ tree.cpp
-
-To run:
-> ./a.out  
 
 ## Google C++ Testing
 Test framework at http://code.google.com/p/googletest/   

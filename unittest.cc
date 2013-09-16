@@ -46,7 +46,6 @@
 #include "tree.h"
 #include "gtest/gtest.h"
 
-
 // Step 2. Use the TEST macro to define your tests.
 //
 // TEST has two parameters: the test case name and the test name.
