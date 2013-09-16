@@ -45,6 +45,7 @@
 
 #include <limits.h>
 #include "sample1.h"
+#include "tree.h"
 #include "gtest/gtest.h"
 
 
@@ -72,7 +73,11 @@
 //
 // </TechnicalDetails>
 
+TEST(TreeTest, isEmpty) {
+  Tree t;
+  EXPECT_EQ(0, t.size());
 
+}
 // Tests Factorial().
 
 // Tests factorial of negative numbers.

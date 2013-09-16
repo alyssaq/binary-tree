@@ -104,15 +104,3 @@ void createTree() {
   Tree t;
   //t.add
 }
-
-int main() {
-  Tree t;
-  //assert(t.size() == 0);
-  t.add(5);
-  t.add(8);
-  t.add(3);
-  t.add(13);
-  t.add(18);
-  cout << boolToStr(t.isEmpty()) << "\n";
-
-}
