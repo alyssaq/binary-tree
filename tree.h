@@ -14,6 +14,7 @@ struct Node {
 
 class Tree {
   Node *root;
+  int _size;
   Node* createNode(int val);
   void deleteNode(Node *node);
 
@@ -21,6 +22,7 @@ public:
   Tree();
   ~Tree();
   bool isEmpty();
+  int size();
   void add(int val);
   void add(Node* newNode);
 

@@ -9,12 +9,14 @@ Node* Tree::createNode(int val) {
   node->left = NULL;
   node->right = NULL;
   node->val = val;
+  _size++;
 
   return node;
 }
 
 Tree::Tree() {
   root = NULL;
+  _size = 0;
 }
 
 void Tree::deleteNode(Node *node) {
@@ -87,6 +89,10 @@ void Tree::add(int val) {
   }
 }
 
+int Tree::size() {
+  return _size;
+}
+
 string boolToStr(bool b) {
   return b ? "true" : "false";
 }
@@ -101,6 +107,7 @@ void createTree() {
 
 int main() {
   Tree t;
+  //assert(t.size() == 0);
   t.add(5);
   t.add(8);
   t.add(3);
