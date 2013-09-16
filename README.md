@@ -15,5 +15,9 @@ Update the relative path to the gtest folder
 Optionally, you may create a symlink to the gtest folder:    
 > ln -s ~/Documents/lib/gtest-1.7.0 gtest
 
+Compile:   
+> make
 
+Run:   
+> ./unittest.out
 
