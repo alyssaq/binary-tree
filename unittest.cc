@@ -70,9 +70,22 @@
 //
 // </TechnicalDetails>
 
-TEST(TreeTest, isEmpty) {
+TEST(TreeTest, emptyTree) {
   Tree t;
+  EXPECT_TRUE(t.isEmpty());
   EXPECT_EQ(0, t.size());
+}
+
+TEST(TreeTest, add) {
+  Tree one, many;
+  one.add(1);
+  EXPECT_FALSE(one.isEmpty());
+  EXPECT_EQ(1, one.size());
+  many.add(13);
+  many.add(3);
+  many.add(205);
+  EXPECT_FALSE(many.isEmpty());
+  EXPECT_EQ(3, many.size());
 }
 
 // Step 3. Call RUN_ALL_TESTS() in main().

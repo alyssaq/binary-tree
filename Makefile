@@ -34,8 +34,11 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 
 all : $(TESTS)
 
-clean : 
+cleanall : 
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
+
+clean : 
+	rm -f $(TESTS) *.o
 
 # Builds gtest.a and gtest_main.a.
 
@@ -64,7 +67,6 @@ gtest_main.a : gtest-all.o gtest_main.o
 # Builds a sample test.  A test should link with either gtest.a or
 # gtest_main.a, depending on whether it defines its own main()
 # function.
-
 
 tree.o : $(USER_DIR)/tree.cpp $(USER_DIR)/tree.h $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/tree.cpp
