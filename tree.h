@@ -31,6 +31,8 @@ class Tree {
   void postorder_travesal(Node *tree, std::string &str);
   void levelorder_travesal(Node *tree, std::string &str);
   void levelorder_withSeparator_travesal(Node *tree, std::string &str);
+  //Level-order travesal but only deals with a queue level of nodes
+  void populateQueueWithNextLvlNodes(queue<Node *> &q, string &str);
 public:
 
   Tree();
