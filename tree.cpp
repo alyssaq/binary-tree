@@ -2,6 +2,7 @@
 #include <iostream>
 #include <new>
 #include <sstream>
+#include <queue>
 
 using namespace std;
 
@@ -67,6 +68,24 @@ void Tree::postorder_travesal(Node *tree, string &str) {
   str = str + int2str(tree->val) + " ";
 }
 
+//Breadth-first search
+void Tree::levelorder_travesal(Node *tree, string &str) {
+  if (tree == NULL) return;
+  queue<Node *> q;
+  Node *node = tree;
+  q.push(node);
+
+  while(!q.empty()) {
+    node = q.front();
+    str = str + int2str(node->val) + " ";
+    q.pop();
+    if (node->left != NULL) 
+      q.push(node->left);
+    if (node->right != NULL)
+      q.push(node->right);
+  }
+}
+
 string Tree::traversal(int traversalEnum) {
   string str = "";
 
@@ -74,13 +93,15 @@ string Tree::traversal(int traversalEnum) {
     case TraversalType::PREORDER:
       preorder_travesal(root, str);
       break;
-    case TraversalType::POSTORDER:
-      postorder_travesal(root, str);
-      break;
-    default:
+    case TraversalType::INORDER:
       inorder_travesal(root, str);
       break;
-
+    case TraversalType::POSTORDER:
+      postorder_travesal(root, str);
+      break; 
+    default:
+      levelorder_travesal(root, str);
+      break;
   }
 
   str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11

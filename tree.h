@@ -15,7 +15,7 @@ struct Node {
 };
 
 namespace TraversalType {
-  enum Traversal_E { PREORDER, INORDER, POSTORDER };
+  enum Traversal_E { PREORDER, INORDER, POSTORDER, LEVELORDER };
 }
 
 class Tree {
@@ -29,6 +29,7 @@ class Tree {
   void preorder_travesal(Node *tree, std::string &str); 
   void inorder_travesal(Node *tree, std::string &str);
   void postorder_travesal(Node *tree, std::string &str);
+  void levelorder_travesal(Node *tree, std::string &str);
 
 public:
 
