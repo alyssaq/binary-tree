@@ -48,6 +48,23 @@ TEST(TreeTest, add) {
   EXPECT_EQ(3, many.size());
 }
 
+TEST(TreeTest, traversal) {
+  Tree t;
+  t.add(13);
+  t.add(3);
+  t.add(20);
+  t.add(7);
+  t.add(15);
+  t.add(1);
+  t.add(4);
+  //        13
+  //    3        20
+  //  1    7    15
+  //     4
+  EXPECT_EQ("13 3 1 7 4 20 15", t.traversal(TraversalType::PREORDER));
+  EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::INORDER)); //default DFS
+  EXPECT_EQ("1 4 7 3 15 20 13", t.traversal(TraversalType::POSTORDER));
+}
 // Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of

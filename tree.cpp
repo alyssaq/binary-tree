@@ -1,8 +1,16 @@
 #include "tree.h"
 #include <iostream>
 #include <new>
+#include <sstream>
 
 using namespace std;
+
+string int2str(int n) {
+  ostringstream sstream;
+  sstream << n;
+  
+  return sstream.str();
+}
 
 Node* Tree::createNode(int val) {
   Node *node = new (nothrow) Node;
@@ -21,10 +29,9 @@ Tree::Tree() {
 
 void Tree::deleteNode(Node *node) {
   if (node == NULL) return;
-
   deleteNode(node->left);
   deleteNode(node->right);
-  cout << "deleting: " << node->val << endl;
+
   delete node;
 }
 
@@ -36,8 +43,48 @@ bool Tree::isEmpty() {
   return (root == NULL);
 }
 
-void traversal() {
+//(root-left-right)
+void Tree::preorder_travesal(Node *tree, string &str) {
+  if (tree == NULL) return;
+  str = str + int2str(tree->val) + " ";
+  preorder_travesal(tree->left, str);
+  preorder_travesal(tree->right, str);
+}
 
+//(left-root-right). DFS
+void Tree::inorder_travesal(Node *tree, string &str) {
+  if (tree == NULL) return;
+  inorder_travesal(tree->left, str);
+  str = str + int2str(tree->val) + " ";
+  inorder_travesal(tree->right, str);
+}
+
+//(left-right-root)
+void Tree::postorder_travesal(Node *tree, string &str) {
+  if (tree == NULL) return;
+  postorder_travesal(tree->left, str);
+  postorder_travesal(tree->right, str);
+  str = str + int2str(tree->val) + " ";
+}
+
+string Tree::traversal(int traversalEnum) {
+  string str = "";
+
+  switch (traversalEnum) {
+    case TraversalType::PREORDER:
+      preorder_travesal(root, str);
+      break;
+    case TraversalType::POSTORDER:
+      postorder_travesal(root, str);
+      break;
+    default:
+      inorder_travesal(root, str);
+      break;
+
+  }
+
+  str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11
+  return str;
 }
 
 Node* findPredecessor(Node *parent, Node *node, int val) {
@@ -69,7 +116,6 @@ void Tree::add(Node* newNode) {
   if (root == NULL) {
     root = newNode;
   } else {
-    cout << "addNode: " << newNode->val << endl;
     Node *parent = findPredecessorToAdd(NULL, root, newNode);
 
     if (newNode->val < parent->val) {
