@@ -52,7 +52,7 @@ void Tree::preorder_travesal(Node *tree, string &str) {
   preorder_travesal(tree->right, str);
 }
 
-//(left-root-right). DFS
+//(left-root-right). Depth-first 
 void Tree::inorder_travesal(Node *tree, string &str) {
   if (tree == NULL) return;
   inorder_travesal(tree->left, str);
