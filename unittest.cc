@@ -65,11 +65,12 @@ TEST(TreeTest, traversal) {
   EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::INORDER)); // DFS
   EXPECT_EQ("1 4 7 3 15 20 13", t.traversal(TraversalType::POSTORDER));
   EXPECT_EQ("13 3 20 1 7 15 4", t.traversal(TraversalType::LEVELORDER)); //BFS
+  EXPECT_EQ("13\n3 20\n1 7 15\n4", t.traversal(TraversalType::LEVELORDER_SEP)); //BFS
 }
 // Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of
-// a main() function which calls RUN_ALL_TESTS() for us.
+// a main() function which calls RUN_ALL_TESTS() for us.⁄
 //
 // This runs all the tests you've defined, prints the result, and
 // returns 0 if successful, or 1 otherwise.

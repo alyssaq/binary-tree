@@ -68,10 +68,10 @@ void Tree::postorder_travesal(Node *tree, string &str) {
   str = str + int2str(tree->val) + " ";
 }
 
-//Breadth-first search
+//Breadth-first traversal
 void Tree::levelorder_travesal(Node *tree, string &str) {
   if (tree == NULL) return;
-  queue<Node *> q;
+  queue<Node *> q, nextLvlQ;
   Node *node = tree;
   q.push(node);
 
@@ -83,6 +83,35 @@ void Tree::levelorder_travesal(Node *tree, string &str) {
       q.push(node->left);
     if (node->right != NULL)
       q.push(node->right);
+  }
+}
+
+void populateQueueWithNextLvlNodes(queue<Node *> &q, queue<Node *> &nextLvlQ, string &str) {
+  while(!q.empty()) {
+    Node *node = q.front();
+    str = str + int2str(node->val) + " ";
+    if (node->left != NULL) 
+      nextLvlQ.push(node->left);
+    if (node->right != NULL)
+      nextLvlQ.push(node->right);
+    q.pop();
+  }
+  str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11
+  str += "\n";
+  cout << str;
+}
+
+//Breadth-first traversal with new-line between each level
+void Tree::levelorder_withSeparator_travesal(Node *tree, string &str) {
+  if (tree == NULL) return;
+  queue<Node *> q, nextLvlQ, empty;
+  Node *node = tree;
+  q.push(node);
+
+  while(!q.empty()) {
+    populateQueueWithNextLvlNodes(q, nextLvlQ, str);
+    q = nextLvlQ;
+    nextLvlQ = empty;
   }
 }
 
@@ -99,6 +128,10 @@ string Tree::traversal(int traversalEnum) {
     case TraversalType::POSTORDER:
       postorder_travesal(root, str);
       break; 
+    case TraversalType::LEVELORDER_SEP:
+      cout << "SEP: " << endl;
+      levelorder_withSeparator_travesal(root, str);
+      break;
     default:
       levelorder_travesal(root, str);
       break;
