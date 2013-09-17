@@ -7,6 +7,7 @@
 #define TREE_H
 
 #include <string>
+#include <queue>
 
 struct Node {
   int val;
@@ -33,7 +34,7 @@ class Tree {
   void levelorder_withSeparator_travesal(Node *tree, std::string &str);
   //Level-order travesal (Breadth-first) 
   // but only deals with a queue level of nodes
-  void populateQueueWithNextLvlNodes(queue<Node *> &q, string &str);
+  void populateQueueWithNextLvlNodes(std::queue<Node *> &q, std::string &str);
 public:
 
   Tree();
