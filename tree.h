@@ -20,8 +20,8 @@ namespace TraversalType {
 }
 
 class Tree {
-  Node *root;
-  int _size;
+  Node *root_;
+  int size_;
 
   Node* createNode(int val);
   void deleteNode(Node *node);
@@ -39,8 +39,8 @@ public:
 
   Tree();
   ~Tree();
-  bool isEmpty();
-  unsigned long size();
+  bool isEmpty() const;
+  unsigned long size() const;
   void add(int val);
   void add(Node* newNode);
   

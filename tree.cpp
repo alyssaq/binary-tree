@@ -18,14 +18,14 @@ Node* Tree::createNode(int val) {
   node->left = NULL;
   node->right = NULL;
   node->val = val;
-  _size++;
+  size_++;
 
   return node;
 }
 
 Tree::Tree() {
-  root = NULL;
-  _size = 0;
+  root_ = NULL;
+  size_ = 0;
 }
 
 void Tree::deleteNode(Node *node) {
@@ -37,11 +37,11 @@ void Tree::deleteNode(Node *node) {
 }
 
 Tree::~Tree() {
-  deleteNode(root);
+  deleteNode(root_);
 }
 
-bool Tree::isEmpty() {
-  return (root == NULL);
+bool Tree::isEmpty() const {
+  return (root_ == NULL);
 }
 
 //(root-left-right)
@@ -121,19 +121,19 @@ string Tree::traversal(int traversalEnum) {
 
   switch (traversalEnum) {
     case TraversalType::PREORDER:
-      preorder_travesal(root, str);
+      preorder_travesal(root_, str);
       break;
     case TraversalType::INORDER:
-      inorder_travesal(root, str);
+      inorder_travesal(root_, str);
       break;
     case TraversalType::POSTORDER:
-      postorder_travesal(root, str);
+      postorder_travesal(root_, str);
       break; 
     case TraversalType::LEVELORDER_SEP:
-      levelorder_withSeparator_travesal(root, str);
+      levelorder_withSeparator_travesal(root_, str);
       break;
     default:
-      levelorder_travesal(root, str);
+      levelorder_travesal(root_, str);
       break;
   }
 
@@ -168,9 +168,9 @@ Node* findPredecessorToAdd(Node *parent, Node* node, Node* newNode) {
 
 void Tree::add(Node* newNode) {
   if (isEmpty()) {
-    root = newNode;
+    root_ = newNode;
   } else {
-    Node *parent = findPredecessorToAdd(NULL, root, newNode);
+    Node *parent = findPredecessorToAdd(NULL, root_, newNode);
 
     if (newNode->val < parent->val) {
       parent->left = newNode;
@@ -185,7 +185,7 @@ void Tree::add(int val) {
   add(newNode);
 }
 
-unsigned long Tree::size() {
-  return _size;
+unsigned long Tree::size() const{
+  return size_;
 }
 
