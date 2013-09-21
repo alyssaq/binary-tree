@@ -6,7 +6,7 @@
 
 using namespace std;
 
-string int2str(int n) {
+inline string int2str(int n) {
   ostringstream sstream;
   sstream << n;
   
@@ -45,7 +45,7 @@ bool Tree::isEmpty() const {
 }
 
 //(root-left-right)
-void Tree::preorderTravesal(Node *tree, string &str) {
+void Tree::preorderTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
   str = str + int2str(tree->val) + " ";
   preorderTravesal(tree->left, str);
@@ -53,7 +53,7 @@ void Tree::preorderTravesal(Node *tree, string &str) {
 }
 
 //(left-root-right). Depth-first 
-void Tree::inorderTravesal(Node *tree, string &str) {
+void Tree::inorderTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
   inorderTravesal(tree->left, str);
   str = str + int2str(tree->val) + " ";
@@ -61,7 +61,7 @@ void Tree::inorderTravesal(Node *tree, string &str) {
 }
 
 //(left-right-root)
-void Tree::postorderTravesal(Node *tree, string &str) {
+void Tree::postorderTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
   postorderTravesal(tree->left, str);
   postorderTravesal(tree->right, str);
@@ -69,7 +69,7 @@ void Tree::postorderTravesal(Node *tree, string &str) {
 }
 
 //Breadth-first traversal
-void Tree::levelorderTravesal(Node *tree, string &str) {
+void Tree::levelorderTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
   queue<Node *> q, nextLvlQ;
   Node *node = tree;
@@ -87,7 +87,7 @@ void Tree::levelorderTravesal(Node *tree, string &str) {
 }
 
 //Deals with nodes at a level in the tree
-void Tree::populateQueueWithNextLvlNodes(queue<Node *> &q, string &str) {
+void Tree::populateQueueWithNextLvlNodes(queue<Node *> &q, string &str) const {
   while(q.front() != NULL) {
     Node *node = q.front();
     str = str + int2str(node->val) + " ";
@@ -103,7 +103,7 @@ void Tree::populateQueueWithNextLvlNodes(queue<Node *> &q, string &str) {
 }
 
 //Breadth-first traversal with new-line between each level
-void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) {
+void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
   queue<Node *> q;
   Node *node = tree;
@@ -115,7 +115,7 @@ void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) {
   }
 }
 
-string Tree::traversal(int traversalEnum) {
+string Tree::traversal(int traversalEnum) const {
   string str = "";
   if (isEmpty()) return str;
 
