@@ -117,6 +117,7 @@ void Tree::levelorder_withSeparator_travesal(Node *tree, string &str) {
 
 string Tree::traversal(int traversalEnum) {
   string str = "";
+  if (root == NULL) return str;
 
   switch (traversalEnum) {
     case TraversalType::PREORDER:

@@ -50,6 +50,13 @@ TEST(TreeTest, add) {
 
 TEST(TreeTest, traversal) {
   Tree t;
+  EXPECT_TRUE(t.isEmpty());
+  EXPECT_EQ("", t.traversal(TraversalType::PREORDER));
+  EXPECT_EQ("", t.traversal(TraversalType::INORDER)); // DFS
+  EXPECT_EQ("", t.traversal(TraversalType::POSTORDER));
+  EXPECT_EQ("", t.traversal(TraversalType::LEVELORDER)); //BFS
+  EXPECT_EQ("", t.traversal(TraversalType::LEVELORDER_SEP)); //BFS
+
   t.add(13);
   t.add(3);
   t.add(20);
@@ -57,16 +64,17 @@ TEST(TreeTest, traversal) {
   t.add(15);
   t.add(1);
   t.add(4);
-  //        13
-  //    3        20
-  //  1    7    15
-  //     4
+  //         13
+  //     3        20
+  //  1     7    15
+  //      4
   EXPECT_EQ("13 3 1 7 4 20 15", t.traversal(TraversalType::PREORDER));
   EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::INORDER)); // DFS
   EXPECT_EQ("1 4 7 3 15 20 13", t.traversal(TraversalType::POSTORDER));
   EXPECT_EQ("13 3 20 1 7 15 4", t.traversal(TraversalType::LEVELORDER)); //BFS
   EXPECT_EQ("13\n3 20\n1 7 15\n4", t.traversal(TraversalType::LEVELORDER_SEP)); //BFS
 }
+
 // Call RUN_ALL_TESTS() in main().
 //
 // We do this by linking in src/gtest_main.cc file, which consists of
