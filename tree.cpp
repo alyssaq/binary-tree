@@ -117,7 +117,7 @@ void Tree::levelorder_withSeparator_travesal(Node *tree, string &str) {
 
 string Tree::traversal(int traversalEnum) {
   string str = "";
-  if (root == NULL) return str;
+  if (isEmpty()) return str;
 
   switch (traversalEnum) {
     case TraversalType::PREORDER:
@@ -167,7 +167,7 @@ Node* findPredecessorToAdd(Node *parent, Node* node, Node* newNode) {
 }
 
 void Tree::add(Node* newNode) {
-  if (root == NULL) {
+  if (isEmpty()) {
     root = newNode;
   } else {
     Node *parent = findPredecessorToAdd(NULL, root, newNode);
@@ -181,22 +181,11 @@ void Tree::add(Node* newNode) {
 }
 
 void Tree::add(int val) {
-  if (root == NULL) {
-    root = createNode(val);
-  } else {
-    Node *newNode = createNode(val);
-    add(newNode);
-  }
+  Node *newNode = createNode(val);
+  add(newNode);
 }
 
 int Tree::size() {
   return _size;
 }
 
-//         13
-//     10      18
-//    5 11   8
-void createTree() {
-  Tree t;
-  //t.add
-}
