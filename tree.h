@@ -1,5 +1,5 @@
 /*
-* Binary tree class
+* Binary search tree (BST)
 * @author: Alyssa Quek 2013
 */
 
@@ -40,7 +40,7 @@ public:
   Tree();
   ~Tree();
   bool isEmpty();
-  int size();
+  unsigned long size();
   void add(int val);
   void add(Node* newNode);
   

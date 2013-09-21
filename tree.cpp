@@ -185,7 +185,7 @@ void Tree::add(int val) {
   add(newNode);
 }
 
-int Tree::size() {
+unsigned long Tree::size() {
   return _size;
 }
 
