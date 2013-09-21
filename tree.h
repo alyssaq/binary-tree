@@ -27,11 +27,11 @@ class Tree {
   void deleteNode(Node *node);
  
   // Travesals as per defined in TraversalType enum
-  void preorder_travesal(Node *tree, std::string &str); 
-  void inorder_travesal(Node *tree, std::string &str);
-  void postorder_travesal(Node *tree, std::string &str);
-  void levelorder_travesal(Node *tree, std::string &str);
-  void levelorder_withSeparator_travesal(Node *tree, std::string &str);
+  void preorderTravesal(Node *tree, std::string &str); 
+  void inorderTravesal(Node *tree, std::string &str);
+  void postorderTravesal(Node *tree, std::string &str);
+  void levelorderTravesal(Node *tree, std::string &str);
+  void levelorderWithSeparatorTravesal(Node *tree, std::string &str);
   //Level-order travesal (Breadth-first) 
   // but only deals with a queue level of nodes
   void populateQueueWithNextLvlNodes(std::queue<Node *> &q, std::string &str);

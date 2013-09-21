@@ -45,31 +45,31 @@ bool Tree::isEmpty() const {
 }
 
 //(root-left-right)
-void Tree::preorder_travesal(Node *tree, string &str) {
+void Tree::preorderTravesal(Node *tree, string &str) {
   if (tree == NULL) return;
   str = str + int2str(tree->val) + " ";
-  preorder_travesal(tree->left, str);
-  preorder_travesal(tree->right, str);
+  preorderTravesal(tree->left, str);
+  preorderTravesal(tree->right, str);
 }
 
 //(left-root-right). Depth-first 
-void Tree::inorder_travesal(Node *tree, string &str) {
+void Tree::inorderTravesal(Node *tree, string &str) {
   if (tree == NULL) return;
-  inorder_travesal(tree->left, str);
+  inorderTravesal(tree->left, str);
   str = str + int2str(tree->val) + " ";
-  inorder_travesal(tree->right, str);
+  inorderTravesal(tree->right, str);
 }
 
 //(left-right-root)
-void Tree::postorder_travesal(Node *tree, string &str) {
+void Tree::postorderTravesal(Node *tree, string &str) {
   if (tree == NULL) return;
-  postorder_travesal(tree->left, str);
-  postorder_travesal(tree->right, str);
+  postorderTravesal(tree->left, str);
+  postorderTravesal(tree->right, str);
   str = str + int2str(tree->val) + " ";
 }
 
 //Breadth-first traversal
-void Tree::levelorder_travesal(Node *tree, string &str) {
+void Tree::levelorderTravesal(Node *tree, string &str) {
   if (tree == NULL) return;
   queue<Node *> q, nextLvlQ;
   Node *node = tree;
@@ -103,7 +103,7 @@ void Tree::populateQueueWithNextLvlNodes(queue<Node *> &q, string &str) {
 }
 
 //Breadth-first traversal with new-line between each level
-void Tree::levelorder_withSeparator_travesal(Node *tree, string &str) {
+void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) {
   if (tree == NULL) return;
   queue<Node *> q;
   Node *node = tree;
@@ -121,19 +121,19 @@ string Tree::traversal(int traversalEnum) {
 
   switch (traversalEnum) {
     case TraversalType::PREORDER:
-      preorder_travesal(root_, str);
+      preorderTravesal(root_, str);
       break;
     case TraversalType::INORDER:
-      inorder_travesal(root_, str);
+      inorderTravesal(root_, str);
       break;
     case TraversalType::POSTORDER:
-      postorder_travesal(root_, str);
+      postorderTravesal(root_, str);
       break; 
     case TraversalType::LEVELORDER_SEP:
-      levelorder_withSeparator_travesal(root_, str);
+      levelorderWithSeparatorTravesal(root_, str);
       break;
     default:
-      levelorder_travesal(root_, str);
+      levelorderTravesal(root_, str);
       break;
   }
 
