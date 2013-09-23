@@ -35,8 +35,8 @@ class Tree {
   //Level-order travesal (Breadth-first) 
   // but only deals with a queue level of nodes
   void populateQueueWithNextLvlNodes(std::queue<Node *> &q, std::string &str) const;
-public:
 
+public:
   Tree();
   ~Tree();
   bool isEmpty() const;
