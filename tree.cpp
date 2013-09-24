@@ -68,6 +68,23 @@ void Tree::postorderTravesal(Node *tree, string &str) const {
   str = str + int2str(tree->val) + " ";
 }
 
+// Extract the front node of the given queue
+//  Add its children into the queue
+// @precondition: given queue has at least one Node 
+// @return string: front node val 
+string extractFrontNodeValAddChildren(queue<Node *> &q) {
+  Node *node = q.front();
+  q.pop(); //remove the node from queue
+  
+  //Add children into the queue
+  if (node->left != NULL) 
+    q.push(node->left);
+  if (node->right != NULL)
+    q.push(node->right);
+
+  return int2str(node->val);
+}
+
 //Breadth-first traversal
 void Tree::levelorderTravesal(Node *tree, string &str) const {
   if (tree == NULL) return;
@@ -76,30 +93,8 @@ void Tree::levelorderTravesal(Node *tree, string &str) const {
   q.push(node);
 
   while(!q.empty()) {
-    node = q.front();
-    str = str + int2str(node->val) + " ";
-    q.pop();
-    if (node->left != NULL) 
-      q.push(node->left);
-    if (node->right != NULL)
-      q.push(node->right);
+    str += extractFrontNodeValAddChildren(q) + " ";
   }
-}
-
-//Deals with nodes at a level in the tree
-void Tree::populateQueueWithNextLvlNodes(queue<Node *> &q, string &str) const {
-  while(q.front() != NULL) {
-    Node *node = q.front();
-    str = str + int2str(node->val) + " ";
-    if (node->left != NULL) 
-      q.push(node->left);
-    if (node->right != NULL)
-      q.push(node->right);
-    q.pop();
-  }
-  q.pop();
-  str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11
-  str += "\n";
 }
 
 //Breadth-first traversal with new-line between each level
@@ -110,8 +105,13 @@ void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) const {
   q.push(node);
 
   while(!q.empty()) {
-    q.push(NULL);
-    populateQueueWithNextLvlNodes(q, str);
+    q.push(NULL); //add a dud NULL node between each level
+    while(q.front() != NULL) {
+      str += extractFrontNodeValAddChildren(q) + " ";
+    }
+    q.pop(); //remove dud NULL node
+    str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11
+    str += "\n";
   }
 }
 
