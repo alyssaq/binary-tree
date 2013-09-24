@@ -3,6 +3,7 @@
 #include <new>
 #include <sstream>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -45,34 +46,60 @@ bool Tree::isEmpty() const {
 }
 
 //(root-left-right)
-void Tree::preorderTravesal(Node *tree, string &str) const {
+void Tree::preorderTraversal(Node *tree, string &str) const {
   if (tree == NULL) return;
   str = str + int2str(tree->val) + " ";
-  preorderTravesal(tree->left, str);
-  preorderTravesal(tree->right, str);
+  preorderTraversal(tree->left, str);
+  preorderTraversal(tree->right, str);
 }
 
 //(left-root-right). Depth-first 
-void Tree::inorderTravesal(Node *tree, string &str) const {
+void Tree::inorderTraversal(Node *tree, string &str) const {
   if (tree == NULL) return;
-  inorderTravesal(tree->left, str);
+  inorderTraversal(tree->left, str);
   str = str + int2str(tree->val) + " ";
-  inorderTravesal(tree->right, str);
+  inorderTraversal(tree->right, str);
 }
 
 //(left-right-root)
-void Tree::postorderTravesal(Node *tree, string &str) const {
+void Tree::postorderTraversal(Node *tree, string &str) const {
   if (tree == NULL) return;
-  postorderTravesal(tree->left, str);
-  postorderTravesal(tree->right, str);
+  postorderTraversal(tree->left, str);
+  postorderTraversal(tree->right, str);
   str = str + int2str(tree->val) + " ";
+}
+
+//Non-recursive DFS
+void Tree::depthFirstTraversal(Node *tree, string &str) const {
+  if (tree == NULL) return;
+  //bool to indicate whether node has been checked
+  stack<pair<bool, Node*> > stack; 
+  Node *node = tree;
+  stack.push(make_pair(false, node));
+
+  while (!stack.empty()) {
+    pair<bool, Node*> p = stack.top();
+    node = p.second;
+    stack.pop();
+
+    if(p.first) {
+      str += int2str(node->val) + " ";
+    } else {
+      if (node->right) 
+        stack.push(make_pair(false, node->right));
+      p.first = true;
+      stack.push(p);
+      if (node->left)
+        stack.push(make_pair(false, node->left));
+    }
+  }
 }
 
 // Extract the front node of the given queue
 //  Add its children into the queue
 // @precondition: given queue has at least one Node 
 // @return string: front node val 
-string extractFrontNodeValAddChildren(queue<Node *> &q) {
+string extractFrontNodeValAppendChildren(queue<Node *> &q) {
   Node *node = q.front();
   q.pop(); //remove the node from queue
   
@@ -86,19 +113,19 @@ string extractFrontNodeValAddChildren(queue<Node *> &q) {
 }
 
 //Breadth-first traversal
-void Tree::levelorderTravesal(Node *tree, string &str) const {
+void Tree::levelorderTraversal(Node *tree, string &str) const {
   if (tree == NULL) return;
   queue<Node *> q, nextLvlQ;
   Node *node = tree;
   q.push(node);
 
   while(!q.empty()) {
-    str += extractFrontNodeValAddChildren(q) + " ";
+    str += extractFrontNodeValAppendChildren(q) + " ";
   }
 }
 
 //Breadth-first traversal with new-line between each level
-void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) const {
+void Tree::levelorderWithSeparatorTraversal(Node *tree, string &str) const {
   if (tree == NULL) return;
   queue<Node *> q;
   Node *node = tree;
@@ -107,7 +134,7 @@ void Tree::levelorderWithSeparatorTravesal(Node *tree, string &str) const {
   while(!q.empty()) {
     q.push(NULL); //add a dud NULL node between each level
     while(q.front() != NULL) {
-      str += extractFrontNodeValAddChildren(q) + " ";
+      str += extractFrontNodeValAppendChildren(q) + " ";
     }
     q.pop(); //remove dud NULL node
     str.resize (str.size () - 1); //remove trailing space. pop_back() in C++11
@@ -121,19 +148,22 @@ string Tree::traversal(int traversalEnum) const {
 
   switch (traversalEnum) {
     case TraversalType::PREORDER:
-      preorderTravesal(root_, str);
+      preorderTraversal(root_, str);
       break;
     case TraversalType::INORDER:
-      inorderTravesal(root_, str);
+      inorderTraversal(root_, str);
       break;
     case TraversalType::POSTORDER:
-      postorderTravesal(root_, str);
+      postorderTraversal(root_, str);
       break; 
     case TraversalType::LEVELORDER_SEP:
-      levelorderWithSeparatorTravesal(root_, str);
+      levelorderWithSeparatorTraversal(root_, str);
+      break;
+    case TraversalType::DEPTHFIRST:
+      depthFirstTraversal(root_, str);
       break;
     default:
-      levelorderTravesal(root_, str);
+      levelorderTraversal(root_, str);
       break;
   }
 
@@ -155,13 +185,13 @@ Node* findPredecessor(Node *parent, Node *node, int val) {
   return NULL;
 }
 
-Node* findPredecessorToAdd(Node *parent, Node* node, Node* newNode) {
+Node* findPredecessorToAdd(Node *parent, Node* node, int val) {
   if (node == NULL) return parent;
   Node *predecessor = NULL;
-  if (newNode->val < node->val) {
-    predecessor = findPredecessorToAdd(node, node->left, newNode);
+  if (val < node->val) {
+    predecessor = findPredecessorToAdd(node, node->left, val);
   } else {
-    predecessor = findPredecessorToAdd(node, node->right, newNode);
+    predecessor = findPredecessorToAdd(node, node->right, val);
   }
   return predecessor;
 }
@@ -170,9 +200,10 @@ void Tree::add(Node* newNode) {
   if (isEmpty()) {
     root_ = newNode;
   } else {
-    Node *parent = findPredecessorToAdd(NULL, root_, newNode);
+    int val = newNode->val;
+    Node *parent = findPredecessorToAdd(NULL, root_, val);
 
-    if (newNode->val < parent->val) {
+    if (val < parent->val) {
       parent->left = newNode;
     } else {
       parent->right = newNode;

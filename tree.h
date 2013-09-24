@@ -16,7 +16,7 @@ struct Node {
 };
 
 namespace TraversalType {
-  enum Traversal_E { PREORDER, INORDER, POSTORDER, LEVELORDER, LEVELORDER_SEP };
+  enum Traversal_E { PREORDER, INORDER, POSTORDER, DEPTHFIRST, LEVELORDER, LEVELORDER_SEP };
 }
 
 class Tree {
@@ -26,13 +26,15 @@ class Tree {
   Node* createNode(int val);
   void deleteNode(Node *node);
  
-  // Travesals as per defined in TraversalType enum
-  void preorderTravesal(Node *tree, std::string &str) const; 
-  void inorderTravesal(Node *tree, std::string &str) const;
-  void postorderTravesal(Node *tree, std::string &str) const;
-  void levelorderTravesal(Node *tree, std::string &str) const;
-  void levelorderWithSeparatorTravesal(Node *tree, std::string &str) const;
-  //Level-order travesal (Breadth-first) 
+  // Traversals as per defined in TraversalType enum
+  void preorderTraversal(Node *tree, std::string &str) const; 
+  void inorderTraversal(Node *tree, std::string &str) const;
+  void postorderTraversal(Node *tree, std::string &str) const;
+
+  void depthFirstTraversal(Node *tree, std::string &str) const;
+  void levelorderTraversal(Node *tree, std::string &str) const;
+  void levelorderWithSeparatorTraversal(Node *tree, std::string &str) const;
+  //Level-order Traversal (Breadth-first) 
   // but only deals with a queue level of nodes
   void populateQueueWithNextLvlNodes(std::queue<Node *> &q, std::string &str) const;
 

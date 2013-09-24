@@ -69,8 +69,9 @@ TEST(TreeTest, traversal) {
   //  1     7    15
   //      4
   EXPECT_EQ("13 3 1 7 4 20 15", t.traversal(TraversalType::PREORDER));
-  EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::INORDER)); // DFS
+  EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::INORDER)); //Recursive DFS
   EXPECT_EQ("1 4 7 3 15 20 13", t.traversal(TraversalType::POSTORDER));
+  EXPECT_EQ("1 3 4 7 13 15 20", t.traversal(TraversalType::DEPTHFIRST)); //Non-recursive DFS
   EXPECT_EQ("13 3 20 1 7 15 4", t.traversal(TraversalType::LEVELORDER)); //BFS
   EXPECT_EQ("13\n3 20\n1 7 15\n4", t.traversal(TraversalType::LEVELORDER_SEP)); //BFS
 }
