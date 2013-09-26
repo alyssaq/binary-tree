@@ -4,6 +4,7 @@
 #include <sstream>
 #include <queue>
 #include <stack>
+#include <list>
 
 using namespace std;
 
@@ -244,5 +245,19 @@ bool Tree::operator==(Tree &tree) const {
   return traveralChecker(root_, tree.getRoot());
 }
 
+void addToList(const Node *node, list<int> &list) {
+  if (node == NULL) {
+    return;
+  } else {
+    list.push_back(node->val);
+  }
+  addToList(node->left, list);
+  addToList(node->right, list);
+}
 
+list<int> Tree::toList() const {
+  list<int> list;
+  addToList(root_, list);
+  return list;
+}
 
