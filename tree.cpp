@@ -220,3 +220,29 @@ unsigned long Tree::size() const{
   return size_;
 }
 
+Node* Tree::getRoot() const {
+  return root_;
+}
+
+
+bool traveralChecker(const Node *aNode, const Node *bNode) {
+  if (aNode == NULL && bNode == NULL) return true;
+  if (aNode == NULL || bNode == NULL || 
+      aNode->val != bNode->val)       return false;
+  bool areLftEq = traveralChecker(aNode->left, bNode->left);
+  bool areRhtEq = traveralChecker(aNode->right, bNode->right);
+
+  return (areLftEq && areRhtEq);
+}
+
+
+//Compare whether 2 trees are identical: O(n)
+bool Tree::operator==(Tree &tree) const {
+  if (&tree == this) return true; //same tree in memory
+  if (size() != tree.size()) return false;
+  
+  return traveralChecker(root_, tree.getRoot());
+}
+
+
+

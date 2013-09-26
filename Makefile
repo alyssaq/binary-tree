@@ -73,9 +73,9 @@ gtest_main.a : gtest-all.o gtest_main.o
 tree.o : $(USER_DIR)/tree.cpp $(USER_DIR)/tree.h $(GTEST_OBJECT)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/tree.cpp
 
-unittest.o : $(USER_DIR)/unittest.cc \
+unittest.o : $(USER_DIR)/unittest.cpp \
              $(USER_DIR)/tree.h $(GTEST_OBJECT)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/unittest.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $(USER_DIR)/unittest.cpp
 
 $(TESTS) : tree.o unittest.o $(GTEST_OBJECT)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@

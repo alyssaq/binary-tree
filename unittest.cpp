@@ -76,12 +76,24 @@ TEST(TreeTest, traversal) {
   EXPECT_EQ("13\n3 20\n1 7 15\n4", t.traversal(TraversalType::LEVELORDER_SEP)); //BFS
 }
 
-// Call RUN_ALL_TESTS() in main().
-//
-// We do this by linking in src/gtest_main.cc file, which consists of
-// a main() function which calls RUN_ALL_TESTS() for us.⁄
-//
-// This runs all the tests you've defined, prints the result, and
-// returns 0 if successful, or 1 otherwise.
-//
-// RUN_ALL_TESTS() macro magically knows about all the defined tests
+TEST(TreeTest, getRoot) {
+  Tree t;
+  t.add(2);
+  t.add(5);
+  EXPECT_EQ(2, t.getRoot()->val);
+  EXPECT_EQ(5, t.getRoot()->right->val);
+}
+
+TEST(TreeTest, Equality) {
+  Tree t1;
+  t1.add(3);
+  t1.add(4);
+  t1.add(5);
+  Tree t2;
+  t2.add(3);
+  EXPECT_TRUE(t1 == t1);
+  EXPECT_FALSE(t1 == t2);
+  t2.add(4);
+  t2.add(5);
+  EXPECT_TRUE(t1 == t2);
+}

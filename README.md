@@ -1,5 +1,13 @@
 # Binary Search Tree (BST) implementation in C++
 
+**Trees** are connected, acyclic undirected graphs.   
+**Binary Trees** have at most 2 children.   
+**Balanced Trees* keep its height (maximal number of levels below the root) small: red-black, AA, 2-3 tree.    
+
+## Binary Search Tree Uses
+-  Storing and retrieving information. O(*n*) insert, delete, and faster search (O(log *n*) compared to O(*n*) for lists)
+- Take advantage of log *n* height
+
 Compile:   
 > make
 
