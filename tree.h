@@ -53,7 +53,7 @@ public:
   /* Compare whether 2 trees of  are identical
    *  O(n) since we have to visit every node */
   bool operator==(Tree &tree) const;
-  std::list<int> toList() const;
+  std::list<int> toList() const; //Convert tree values to list
 };
 
 #endif

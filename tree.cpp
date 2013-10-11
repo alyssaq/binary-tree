@@ -226,23 +226,27 @@ Node* Tree::getRoot() const {
 }
 
 
-bool traveralChecker(const Node *aNode, const Node *bNode) {
+bool traversalChecker(const Node *aNode, const Node *bNode) {
   if (aNode == NULL && bNode == NULL) return true;
   if (aNode == NULL || bNode == NULL || 
       aNode->val != bNode->val)       return false;
-  bool areLftEq = traveralChecker(aNode->left, bNode->left);
-  bool areRhtEq = traveralChecker(aNode->right, bNode->right);
+  bool areLftEq = traversalChecker(aNode->left, bNode->left);
+  bool areRhtEq = traversalChecker(aNode->right, bNode->right);
 
   return (areLftEq && areRhtEq);
 }
 
 
 //Compare whether 2 trees are identical: O(n)
+// Base checks:
+//  True - same tree in memory, both nodes are NULL
+//  False - trees are diff size, 
+//          nodes are not NULL and have diff values
 bool Tree::operator==(Tree &tree) const {
   if (&tree == this) return true; //same tree in memory
   if (size() != tree.size()) return false;
   
-  return traveralChecker(root_, tree.getRoot());
+  return traversalChecker(root_, tree.getRoot());
 }
 
 void addToList(const Node *node, list<int> &list) {
