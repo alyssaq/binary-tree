@@ -13,10 +13,10 @@ O(n) insert, delete, and faster search (O(log *n*) compared to O(n) for lists)
 ## Code usage
 
 Compile:   
-> make
+    > make
 
-Run:   
-> ./unittest.out
+Run:
+    > ./unittest.out
 
 You should see all tests PASSED.  
 
@@ -30,7 +30,6 @@ test framework at http://code.google.com/p/googletest/
 
 Move the gtest folder somewhere permenant, e.g. ~/Documents.   
 Create a symlink to the gtest folder where Makefile resides.
-        
     > ln -s ~/Documents/lib/gtest-1.7.0 gtest  
 
 To use it, comment out the .INTERMEDIATE line in the Makefile.
